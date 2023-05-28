@@ -47,7 +47,7 @@ int main () {
     cout << " * przypisanie zmiennej: " << endl;
     cout << "    set NAZWA to WYRAZENIE" << endl;
     cout << "    NAZWA nie moze byc nazwa polecenia ani operatora" << endl;
-    cout << "    i nie moze zaczynac sie od liczby" << endl;
+    cout << "    i nie moze zaczynac sie od cyfry ani minusa (-)" << endl;
     cout << "    np. set x to 3 1 +" << endl;
     cout << " * obliczenie wartosci wyrazenia: " << endl;
     cout << "    print WYRAZENIE" << endl;
