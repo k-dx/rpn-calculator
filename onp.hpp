@@ -36,11 +36,11 @@ void print_help();
 
 
 const std::array<std::pair<std::string, Command>, 5> COMMAND_MAP {
-    make_pair("clear", Command::clear),
-    make_pair("exit",  Command::exit),
-    make_pair("help",  Command::help),
-    make_pair("print", Command::print),
-    make_pair("set",   Command::set)
+    std::make_pair("clear", Command::clear),
+    std::make_pair("exit",  Command::exit),
+    std::make_pair("help",  Command::help),
+    std::make_pair("print", Command::print),
+    std::make_pair("set",   Command::set)
 };
 // const vector<pair<string, Command>> commandMap = {
 //     { "clear", Command::clear },
@@ -57,31 +57,31 @@ const std::array<
   23
 > SYMBOL_MAP {
     // 1-argument operators
-    make_pair("abs", Abs::create),
-    make_pair("sgn", Sgn::create),
-    make_pair("floor", Floor::create),
-    make_pair("ceil", Ceil::create),
-    make_pair("frac", Frac::create),
-    make_pair("sin", Sin::create),
-    make_pair("cos", Cos::create),
-    make_pair("atan", Atan::create),
-    make_pair("acot", Acot::create),
-    make_pair("ln", Ln::create),
-    make_pair("exp", Exp::create),
+    std::make_pair("abs", Abs::create),
+    std::make_pair("sgn", Sgn::create),
+    std::make_pair("floor", Floor::create),
+    std::make_pair("ceil", Ceil::create),
+    std::make_pair("frac", Frac::create),
+    std::make_pair("sin", Sin::create),
+    std::make_pair("cos", Cos::create),
+    std::make_pair("atan", Atan::create),
+    std::make_pair("acot", Acot::create),
+    std::make_pair("ln", Ln::create),
+    std::make_pair("exp", Exp::create),
     // 2-argument operators
-    make_pair("+", Add::create),
-    make_pair("-", Subtract::create),
-    make_pair("*", Multiply::create),
-    make_pair("/", Divide::create),
-    make_pair("%", Modulo::create),
-    make_pair("min", Min::create),
-    make_pair("max", Max::create),
-    make_pair("log", Log::create),
-    make_pair("pow", Pow::create),
+    std::make_pair("+", Add::create),
+    std::make_pair("-", Subtract::create),
+    std::make_pair("*", Multiply::create),
+    std::make_pair("/", Divide::create),
+    std::make_pair("%", Modulo::create),
+    std::make_pair("min", Min::create),
+    std::make_pair("max", Max::create),
+    std::make_pair("log", Log::create),
+    std::make_pair("pow", Pow::create),
     // Stale
-    make_pair("e", EConstant::create),
-    make_pair("phi", PhiConstant::create),
-    make_pair("pi", PiConstant::create)
+    std::make_pair("e", EConstant::create),
+    std::make_pair("phi", PhiConstant::create),
+    std::make_pair("pi", PiConstant::create)
 };
 }
 
