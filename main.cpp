@@ -2,6 +2,7 @@
 using namespace std;
 
 #include "onp.hpp"
+#include "operands.hpp"
 using namespace kalkulator;
 
 int main () {
