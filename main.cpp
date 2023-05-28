@@ -4,12 +4,6 @@ using namespace std;
 #include "onp.hpp"
 using namespace kalkulator;
 
-void print_help() {
-    cout << "A B - (~ A - B)" << endl;
-    cout << "BASE ARGUMENT log" << endl;
-    cout << "BASE EXPONENT pow" << endl;
-}
-
 int main () {
     // {
     //     cout << "<<< 1 >>>" << endl;
@@ -52,6 +46,8 @@ int main () {
     cout << "Dostepne polecenia:" << endl;
     cout << " * przypisanie zmiennej: " << endl;
     cout << "    set NAZWA to WYRAZENIE" << endl;
+    cout << "    NAZWA nie moze byc nazwa polecenia ani operatora" << endl;
+    cout << "    i nie moze zaczynac sie od liczby" << endl;
     cout << "    np. set x to 3 1 +" << endl;
     cout << " * obliczenie wartosci wyrazenia: " << endl;
     cout << "    print WYRAZENIE" << endl;
@@ -60,6 +56,8 @@ int main () {
     cout << "    clear" << endl;
     cout << " * wyjscie: " << endl;
     cout << "    exit" << endl;
+    cout << " * pomoc: " << endl;
+    cout << "    help" << endl;
 
     string s;
     Parser parser;
@@ -73,6 +71,9 @@ int main () {
         }
         else if (cmd == Command::exit) {
             break;
+        }
+        else if (cmd == Command::help) {
+            print_help();
         }
         else if (cmd == Command::print) {
             try {
