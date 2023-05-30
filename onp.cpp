@@ -1,3 +1,7 @@
+// Jakub Dubiel
+// Kurs C++
+// Lista 11: Kalkulator ONP
+// kompilacja: g++ -std=c++17 *.cpp
 #include "onp.hpp"
 #include "functions.hpp"
 #include <bits/stdc++.h>
@@ -12,12 +16,6 @@ const array<pair<string, Command>, 5> COMMAND_MAP {
     make_pair("print", Command::print),
     make_pair("set",   Command::set)
 };
-// const vector<pair<string, Command>> commandMap = {
-//     { "clear", Command::clear },
-//     { "exit",  Command::exit },
-//     { "print", Command::print },
-//     { "set",   Command::set }
-// };
 
 const array<pair<string, function<unique_ptr<Symbol>()>>, 23> SYMBOL_MAP {
     // 1-argument operators

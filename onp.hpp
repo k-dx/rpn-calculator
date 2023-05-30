@@ -1,3 +1,7 @@
+// Jakub Dubiel
+// Kurs C++
+// Lista 11: Kalkulator ONP
+// kompilacja: g++ -std=c++17 *.cpp
 #ifndef ONP_HPP
 #define ONP_HPP
 
@@ -13,10 +17,7 @@ class Symbol {
     virtual double eval(std::stack<double> &s) = 0;
 };
 
-class Operand : public Symbol {
-  // public:
-    // virtual double eval(std::stack<double> &s) = 0;
-};
+class Operand : public Symbol { };
 
 class Liczba : public Operand {
     double m_value;
@@ -25,10 +26,7 @@ class Liczba : public Operand {
     double eval(std::stack<double> &s);
 };
 
-class Stala : public Operand {
-  // public:
-    // virtual double eval(std::stack<double> &s) = 0;
-};
+class Stala : public Operand { };
 
 class PhiConstant : public Stala {
   public:
