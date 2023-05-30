@@ -12,15 +12,15 @@ class Funkcja : public Symbol {
         std::stack<double> &s,
         std::string function_name
     );
-  public:
-    virtual double eval(std::stack<double> &s) = 0;
+  // public:
+    // virtual double eval(std::stack<double> &s) = 0;
 };
 
 class Operator1 : public Funkcja {
   protected:
     unsigned int get_arity();
-  public:
-    virtual double eval(std::stack<double> &s) = 0;
+  // public:
+  //   virtual double eval(std::stack<double> &s) = 0;
 };
 
 class Abs : public Operator1 {
@@ -82,8 +82,8 @@ class Exp : public Operator1 {
 class Operator2 : public Funkcja {
   protected:
     unsigned int get_arity();
-  public:
-    virtual double eval(std::stack<double> &s) = 0;
+  // public:
+  //   virtual double eval(std::stack<double> &s) = 0;
 };
 
 class Add : public Operator2 {

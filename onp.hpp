@@ -14,8 +14,8 @@ class Symbol {
 };
 
 class Operand : public Symbol {
-  public:
-    virtual double eval(std::stack<double> &s) = 0;
+  // public:
+    // virtual double eval(std::stack<double> &s) = 0;
 };
 
 class Liczba : public Operand {
@@ -26,8 +26,8 @@ class Liczba : public Operand {
 };
 
 class Stala : public Operand {
-  public:
-    virtual double eval(std::stack<double> &s) = 0;
+  // public:
+    // virtual double eval(std::stack<double> &s) = 0;
 };
 
 class PhiConstant : public Stala {
