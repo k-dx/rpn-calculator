@@ -1,7 +1,5 @@
 // Jakub Dubiel
-// Kurs C++
-// Lista 11: Kalkulator ONP
-// kompilacja: g++ -std=c++17 *.cpp
+// ONP Calculator
 #ifndef FUNCTIONS_HPP
 #define FUNCTIONS_HPP
 
