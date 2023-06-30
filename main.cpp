@@ -6,7 +6,7 @@
 using namespace std;
 
 #include "onp.hpp"
-using namespace kalkulator;
+using namespace calculator;
 
 int main () {
     // {
@@ -71,7 +71,7 @@ int main () {
         Command cmd = parser.parse_command(s);
 
         if (cmd == Command::clear) {
-            Zmienna::clear();
+            Variable::clear();
         }
         else if (cmd == Command::exit) {
             break;
@@ -91,7 +91,7 @@ int main () {
             try {
                 pair<string, queue<unique_ptr<Symbol>>> parsed = parser.parse_set(s);
                 double value = eval(std::move(parsed.second));
-                Zmienna::set_variable(parsed.first, value);
+                Variable::set_variable(parsed.first, value);
                 cout << value << endl;
             } catch (exception &e) {
                 clog << "Blad: " << e.what() << endl;

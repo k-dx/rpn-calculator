@@ -8,8 +8,8 @@
 #include "onp.hpp"
 #include <bits/stdc++.h>
 
-namespace kalkulator {
-class Funkcja : public Symbol {
+namespace calculator {
+class Function : public Symbol {
   protected:
     virtual unsigned int get_arity() = 0;
     std::vector<double> pop_stack(
@@ -18,7 +18,7 @@ class Funkcja : public Symbol {
     );
 };
 
-class Operator1 : public Funkcja {
+class Operator1 : public Function {
   protected:
     unsigned int get_arity();
 };
@@ -79,7 +79,7 @@ class Exp : public Operator1 {
     static std::unique_ptr<Exp> create();
 };
 
-class Operator2 : public Funkcja {
+class Operator2 : public Function {
   protected:
     unsigned int get_arity();
 };

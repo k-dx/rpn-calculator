@@ -5,9 +5,9 @@
 #include "functions.hpp"
 using namespace std;
 
-namespace kalkulator {
-// Funkcja --------------------------------------------------------------------
-vector<double> Funkcja::pop_stack(stack<double> &s, string function_name) {
+namespace calculator {
+// Function -------------------------------------------------------------------
+vector<double> Function::pop_stack(stack<double> &s, string function_name) {
     if (s.size() < get_arity())
         throw invalid_argument(function_name + " wymaga " 
                                + to_string(get_arity()) + " argumentow");
@@ -18,7 +18,7 @@ vector<double> Funkcja::pop_stack(stack<double> &s, string function_name) {
     }
     return result;
 }
-// Funkcja --------------------------------------------------------------------
+// Function -------------------------------------------------------------------
 
 // Operator1 ------------------------------------------------------------------
 unsigned int Operator1::get_arity() { return 1; }

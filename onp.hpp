@@ -7,7 +7,7 @@
 
 #include <bits/stdc++.h>
 
-namespace kalkulator {
+namespace calculator {
 enum Command {
     clear, exit, help, set, print, unknown
 };
@@ -19,38 +19,38 @@ class Symbol {
 
 class Operand : public Symbol { };
 
-class Liczba : public Operand {
+class Number : public Operand {
     double m_value;
   public:
-    Liczba(double value);
+    Number(double value);
     double eval(std::stack<double> &s);
 };
 
-class Stala : public Operand { };
+class Constant : public Operand { };
 
-class PhiConstant : public Stala {
+class PhiConstant : public Constant {
   public:
     double eval(std::stack<double> &s);
     static std::unique_ptr<PhiConstant> create();
 };
-class EConstant : public Stala {
+class EConstant : public Constant {
   public:
     double eval(std::stack<double> &s);
     static std::unique_ptr<EConstant> create();
 };
-class PiConstant : public Stala {
+class PiConstant : public Constant {
   public:
     double eval(std::stack<double> &s);
     static std::unique_ptr<PiConstant> create();
 };
 
-class Zmienna : public Operand {
+class Variable : public Operand {
     static std::map<std::string, double> bindings;
     static unsigned int MAX_VARIABLE_NAME_LENGTH;
     static void check_name(std::string name);
     std::string m_name;
   public:
-    Zmienna(std::string name);
+    Variable(std::string name);
 
     static void set_variable(std::string name, double value);
     static double get_variable(std::string name);
