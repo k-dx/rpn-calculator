@@ -1,14 +1,17 @@
 // Jakub Dubiel
-// ONP Calculator
+// RPN Calculator
 #include "functions.hpp"
+#include "lang.hpp"
 using namespace std;
 
 namespace calculator {
 // Function -------------------------------------------------------------------
 vector<double> Function::pop_stack(stack<double> &s, string function_name) {
     if (s.size() < get_arity())
-        throw invalid_argument(function_name + " wymaga " 
-                               + to_string(get_arity()) + " argumentow");
+        throw invalid_argument(function_name + " "
+                               + lang::get(lang::needs) + " " 
+                               + to_string(get_arity()) + " "
+                               + lang::get(lang::arguments));
     vector<double> result;
     for (unsigned int i = 0; i < get_arity(); i++) {
         result.push_back(s.top());
@@ -80,7 +83,8 @@ unique_ptr<Atan> Atan::create() { return unique_ptr<Atan>{new Atan}; };
 double Acot::eval(stack<double> &s) {
     vector<double> args = pop_stack(s, "acot");
     if (args[0] == 0.0)
-        throw invalid_argument("acot jest niezdefiniowany dla 0");
+        throw invalid_argument("acot " 
+                               + lang::get(lang::is_not_defined_for) + " 0");
     return atan(1.0 / args[0]);
 }
 unique_ptr<Acot> Acot::create() { return unique_ptr<Acot>{new Acot}; };
@@ -104,25 +108,25 @@ unsigned int Operator2::get_arity() { return 2; }
 
 // Operator2 Derived ----------------------------------------------------------
 double Add::eval(stack<double> &s) {
-    vector<double> args = pop_stack(s, "Dodawanie");
+    vector<double> args = pop_stack(s, lang::get(lang::addition));
     return args[1] + args[0];
 }
 unique_ptr<Add> Add::create() { return unique_ptr<Add>{new Add}; }
 
 double Subtract::eval(stack<double> &s) {
-    vector<double> args = pop_stack(s, "Odejmowanie");
+    vector<double> args = pop_stack(s, lang::get(lang::subtraction));
     return args[1] - args[0];
 }
 unique_ptr<Subtract> Subtract::create() { return unique_ptr<Subtract>{new Subtract}; }
 
 double Multiply::eval(stack<double> &s) {
-    vector<double> args = pop_stack(s, "Mnozenie");
+    vector<double> args = pop_stack(s, lang::get(lang::multiplication));
     return args[1] * args[0];
 }
 unique_ptr<Multiply> Multiply::create() { return unique_ptr<Multiply>{new Multiply}; }
 
 double Divide::eval(stack<double> &s) {
-    vector<double> args = pop_stack(s, "Dzielenie");
+    vector<double> args = pop_stack(s, lang::get(lang::division));
     return args[1] / args[0];
 }
 unique_ptr<Divide> Divide::create() { return unique_ptr<Divide>{new Divide}; }
@@ -134,7 +138,8 @@ double Modulo::eval(stack<double> &s) {
     double a_frac = modf(args[0], &intpart);
     double b_frac = modf(args[1], &intpart);
     if (a_frac != 0.0 or b_frac != 0.0)
-        throw invalid_argument("Modulo wymaga argumentow calkowitych.");
+        throw invalid_argument("Modulo " 
+                               + lang::get(lang::needs_integer_arguments));
     int a = args[0];
     int b = args[1];
     return b % a;

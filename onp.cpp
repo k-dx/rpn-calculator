@@ -1,7 +1,8 @@
 // Jakub Dubiel
-// ONP Calculator
+// RPN Calculator
 #include "onp.hpp"
 #include "functions.hpp"
+#include "lang.hpp"
 #include <bits/stdc++.h>
 #include <memory>
 using namespace std;
@@ -73,18 +74,20 @@ std::map<std::string, double> Variable::bindings;
 void Variable::check_name (string name) {
     for (auto &binding : COMMAND_MAP)
         if (name == binding.first)
-            throw invalid_argument("Nazwa zmiennej nie moze byc poleceniem.");
+            throw invalid_argument(lang::get(lang::varname_cannot_be_command));
     for (auto &binding : SYMBOL_MAP)
         if (name == binding.first)
-            throw invalid_argument("Nazwa zmiennej nie moze byc operatorem.");
+            throw invalid_argument(lang::get(lang::varname_cannot_be_operator));
     if ('0' <= name[0] and name[0] <= '9')
-        throw invalid_argument("Nazwa zmiennej nie moze zaczynac sie od cyfry.");
+        throw invalid_argument(lang::get(lang::varname_cannot_start_with_digit));
     if (name[0] == '-')
-        throw invalid_argument("Nazwa zmiennej nie moze zaczynac sie od minusa (-).");
+        throw invalid_argument(lang::get(lang::varname_cannot_start_with_minus));
     if (name.size() > MAX_VARIABLE_NAME_LENGTH)
-        throw invalid_argument("Nazwa zmiennej nie moze miec wiecej niz " 
+        throw invalid_argument(lang::get(lang::varname_cannot_be_longer_than) 
+                                + " "
                                 + to_string(MAX_VARIABLE_NAME_LENGTH)
-                                + " znakow.");
+                                + " "
+                                + lang::get(lang::characters));
 }
 
 Variable::Variable(string name) {
@@ -101,8 +104,8 @@ void Variable::set_variable(string name, double value) {
 
 double Variable::get_variable(string name) {
     if (bindings.find(name) == bindings.end())
-        throw invalid_argument("Zmienna " + name 
-                               + " nie ma przypisanej wartosci.");
+        throw invalid_argument(lang::get(lang::variable) + " " + name + " "
+                               + lang::get(lang::does_not_have_value));
     return bindings[name];
 }
 
@@ -145,7 +148,7 @@ vector<string> Parser::split(const string &s, char delimiter) {
 pair<string, queue<unique_ptr<Symbol>>> Parser::parse_set(string s) {
     vector<string> parts = split(s, ' ');
     if (parts[0] != "set" or parts[2] != "to")
-        throw invalid_argument("Niepoprawna skladnia polecenia set.");
+        throw invalid_argument(lang::get(lang::invalid_set_syntax));
     
     // cerr << "command = |" << parts[0] << "|" << endl;
     // cerr << "var_name = |" << parts[1] << "|" << endl;
@@ -195,14 +198,14 @@ double eval(queue<unique_ptr<Symbol>> q) {
         s.push(e->eval(s));
     }
     if (s.size() != 1)
-        throw invalid_argument("Wyrazenie jest niepoprawne");
+        throw invalid_argument(lang::get(lang::bad_expression));
     return s.top();
 }
 // eval -----------------------------------------------------------------------
 
 // print_help -----------------------------------------------------------------
 void print_help() {
-    cout << "Dostepne operatory: ";
+    cout << lang::get(lang::available_operators) + ": ";
     for (auto &e : SYMBOL_MAP)
         cout << e.first << ", ";
     cout << endl;

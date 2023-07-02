@@ -1,12 +1,14 @@
 // Jakub Dubiel
-// ONP Calculator
+// RPN Calculator
 #include <bits/stdc++.h>
 using namespace std;
 
 #include "onp.hpp"
 using namespace calculator;
 
-int main () {
+#include "lang.hpp"
+
+int main (int argc, char* argv[]) {
     // {
     //     cout << "<<< 1 >>>" << endl;
     //     Parser parser;
@@ -44,22 +46,14 @@ int main () {
     //     parser.parse_set(s);
     // }
 
-    cout << "### Kalkulator ONP ###" << endl;
-    cout << "Dostepne polecenia:" << endl;
-    cout << " * przypisanie zmiennej: " << endl;
-    cout << "    set NAZWA to WYRAZENIE" << endl;
-    cout << "    NAZWA nie moze byc nazwa polecenia ani operatora" << endl;
-    cout << "    i nie moze zaczynac sie od cyfry ani minusa (-)" << endl;
-    cout << "    np. set x to 3 1 +" << endl;
-    cout << " * obliczenie wartosci wyrazenia: " << endl;
-    cout << "    print WYRAZENIE" << endl;
-    cout << "    np. print x 1 -" << endl;
-    cout << " * wyczyszczenie wartosci zmiennych: " << endl;
-    cout << "    clear" << endl;
-    cout << " * wyjscie: " << endl;
-    cout << "    exit" << endl;
-    cout << " * pomoc: " << endl;
-    cout << "    help" << endl;
+    int language = lang::EN;
+    if (argc == 2 and strcmp(argv[1], "pl") == 0) {
+        language = lang::PL;
+    }
+    lang::init(language);
+
+
+    cout << lang::get(lang::welcome_message) << endl;
 
     string s;
     Parser parser;
@@ -82,7 +76,7 @@ int main () {
                 queue<unique_ptr<Symbol>> parsed = parser.parse_print(s);
                 cout << eval(std::move(parsed)) << endl;
             } catch (exception &e) {
-                clog << "Blad: " << e.what() << endl;
+                clog << lang::get(lang::error) << ": " << e.what() << endl;
             }
         }
         else if (cmd == Command::set) {
@@ -92,11 +86,12 @@ int main () {
                 Variable::set_variable(parsed.first, value);
                 cout << value << endl;
             } catch (exception &e) {
-                clog << "Blad: " << e.what() << endl;
+                clog << lang::get(lang::error) << ": " << e.what() << endl;
             }
         }
         else {
-            clog << "Blad: Nieznane polecenie." << endl;
+            clog << lang::get(lang::error) << ": " 
+            << lang::get(lang::unknown_command) << endl;
         }
         cout << PROMPT;
     }

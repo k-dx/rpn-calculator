@@ -1,5 +1,5 @@
 // Jakub Dubiel
-// ONP Calculator
+// RPN Calculator
 #ifndef FUNCTIONS_HPP
 #define FUNCTIONS_HPP
 
